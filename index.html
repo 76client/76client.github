@@ -3,19 +3,444 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>76 Client - Advanced Minecraft Utility Mod</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>76 CLIENT - Advanced Minecraft Utility Mod</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #00d4ff;
+            --dark: #0a0e27;
+            --darker: #050710;
+            --card-bg: rgba(26, 31, 58, 0.8);
+            --border: rgba(0, 212, 255, 0.3);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #e0e0e0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #fff;
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            background: linear-gradient(90deg, rgba(26, 31, 58, 0.95), rgba(0, 212, 255, 0.05));
+            padding: 1.5rem 0;
+            border-bottom: 2px solid var(--primary);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary);
+            text-shadow: 0 0 20px var(--primary);
+            letter-spacing: 3px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            background: radial-gradient(circle at center, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+        }
+
+        .hero-content h1 {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            text-shadow: 0 0 40px var(--primary);
+            animation: pulse 2s ease-in-out infinite;
+            letter-spacing: 2px;
+        }
+
+        @keyframes pulse {
+            0%, 100% { text-shadow: 0 0 40px var(--primary); }
+            50% { text-shadow: 0 0 80px var(--primary), 0 0 120px rgba(0, 212, 255, 0.5); }
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            color: #b0b0b0;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content .version {
+            font-size: 1rem;
+            color: #888;
+            margin-bottom: 3rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), #0099cc);
+            color: var(--dark);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 50px rgba(0, 212, 255, 0.8);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 0;
+        }
+
+        section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--primary);
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+
+        .stat-card h3 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card p {
+            color: #b0b0b0;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-10px);
+            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .feature-card p {
+            color: #b0b0b0;
+            line-height: 1.8;
+        }
+
+        /* Installation */
+        .install-container {
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary);
+            margin: 2rem 0;
+        }
+
+        .step {
+            margin: 2rem 0;
+            padding-left: 3rem;
+            position: relative;
+        }
+
+        .step::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2.5rem;
+            height: 2.5rem;
+            background: linear-gradient(135deg, var(--primary), #0099cc);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .step h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .step code {
+            background: var(--darker);
+            padding: 0.8rem 1.2rem;
+            border-radius: 5px;
+            display: block;
+            margin-top: 0.5rem;
+            color: var(--primary);
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            border-left: 3px solid var(--primary);
+        }
+
+        /* Modules Grid */
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .module-badge {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid var(--primary);
+            padding: 1.2rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .module-badge:hover {
+            background: rgba(0, 212, 255, 0.2);
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.3);
+        }
+
+        .module-name {
+            color: var(--primary);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .module-category {
+            font-size: 0.75rem;
+            color: #888;
+        }
+
+        /* Requirements Box */
+        .requirements-box {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary);
+            margin: 2rem 0;
+        }
+
+        .requirements-box h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .requirements-box ul {
+            list-style: none;
+            color: #b0b0b0;
+        }
+
+        .requirements-box li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .requirements-box li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(90deg, rgba(26, 31, 58, 0.95), rgba(0, 212, 255, 0.05));
+            color: #888;
+            text-align: center;
+            padding: 3rem 0;
+            border-top: 2px solid var(--primary);
+            margin-top: 5rem;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            nav .container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .btn-group {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
 </head>
 <body>
+    <div class="stars" id="stars"></div>
+
     <!-- Navigation -->
-    <nav class="navbar">
+    <nav>
         <div class="container">
-            <div class="logo">76 CLIENT</div>
+            <div class="logo">⚡ 76 CLIENT</div>
             <ul class="nav-links">
-                <li><a href="/">Home</a></li>
-                <li><a href="/features">Features</a></li>
-                <li><a href="/modules">Modules ({{ modules_count }})</a></li>
-                <li><a href="/download">Download</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#install">Installation</a></li>
+                <li><a href="#modules">Modules</a></li>
+                <li><a href="#requirements">Requirements</a></li>
             </ul>
         </div>
     </nav>
@@ -23,52 +448,225 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1>76 CLIENT V1 BETA</h1>
-            <p>Advanced Minecraft Utility Mod for 1.21.1</p>
-            <p class="subtitle">{{ modules_count }} Powerful Modules | Fake Rotation | Combat Ready</p>
-            <button class="cta-btn">Get Started</button>
+            <h1>76 CLIENT</h1>
+            <p>Advanced Minecraft Utility Mod</p>
+            <p class="version">v1.0 BETA | Minecraft 1.21.1 | 111 Modules</p>
+            <div class="btn-group">
+                <button class="btn btn-primary">📥 Download Now</button>
+                <button class="btn btn-secondary">📖 Learn More</button>
+            </div>
         </div>
     </section>
 
-    <!-- Features Preview -->
-    <section class="features-preview">
+    <!-- Stats -->
+    <section>
         <div class="container">
-            <h2>Key Features</h2>
+            <h2>📊 The Numbers</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>111</h3>
+                    <p>Modules</p>
+                </div>
+                <div class="stat-card">
+                    <h3>1.21.1</h3>
+                    <p>Minecraft Version</p>
+                </div>
+                <div class="stat-card">
+                    <h3>BETA</h3>
+                    <p>Current Status</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features">
+        <div class="container">
+            <h2>🎮 Key Features</h2>
             <div class="features-grid">
                 <div class="feature-card">
-                    <h3>⚔️ Combat</h3>
-                    <p>KillAura with fake rotation, AutoCrystal, and more</p>
+                    <div class="feature-icon">⚔️</div>
+                    <h3>Combat Ready</h3>
+                    <p>KillAura with fake rotation, AutoCrystal, CrystalAura, and advanced combat utilities</p>
                 </div>
                 <div class="feature-card">
-                    <h3>👁️ ESP</h3>
-                    <p>2D/3D ESP for players, mobs, and blocks</p>
+                    <div class="feature-icon">👁️</div>
+                    <h3>Advanced ESP</h3>
+                    <p>2D/3D ESP for players, mobs, blocks, storage, and more</p>
                 </div>
                 <div class="feature-card">
-                    <h3>🛠️ Utility</h3>
-                    <p>Schematic Builder, Auto tools, and automation</p>
+                    <div class="feature-icon">🔥</div>
+                    <h3>Fake Rotation</h3>
+                    <p>Your camera stays in place while others see you rotating</p>
                 </div>
                 <div class="feature-card">
-                    <h3>🎮 Movement</h3>
-                    <p>Freecam, ElytraFly, Speed, and more</p>
+                    <div class="feature-icon">🏗️</div>
+                    <h3>Schematic Builder</h3>
+                    <p>Auto-build structures from Litematica files using inventory blocks</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Beautiful UI</h3>
+                    <p>Customizable ClickGUI with themes, colors, and layouts</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Lightweight</h3>
+                    <p>Optimized for performance with minimal resource usage</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3>Friend System</h3>
+                    <p>Manage friends and protect them from harmful modules</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💾</div>
+                    <h3>Config System</h3>
+                    <p>Save and load configurations easily</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Module Count -->
-    <section class="stats">
+    <!-- Installation -->
+    <section id="install">
         <div class="container">
-            <div class="stat">
-                <h2>{{ modules_count }}</h2>
-                <p>Modules</p>
+            <h2>📥 Installation Guide</h2>
+            
+            <div class="requirements-box">
+                <h3>✓ Requirements</h3>
+                <ul>
+                    <li>Minecraft 1.21.1</li>
+                    <li>Fabric Loader 0.20+</li>
+                    <li>Fabric API</li>
+                    <li>Java 21+</li>
+                </ul>
             </div>
-            <div class="stat">
-                <h2>1.21.1</h2>
-                <p>Minecraft Version</p>
+
+            <div class="install-container">
+                <div class="step">
+                    <h4>Step 1: Install Fabric Loader</h4>
+                    <p>Download from <strong>fabricmc.net</strong> and run the installer</p>
+                </div>
+                
+                <div class="step">
+                    <h4>Step 2: Download 76 Client</h4>
+                    <p>Get the latest build from releases</p>
+                    <code>client76-1.0.jar</code>
+                </div>
+                
+                <div class="step">
+                    <h4>Step 3: Place JAR in Mods Folder</h4>
+                    <p>Move to <strong>.minecraft/mods/</strong> directory</p>
+                    <code>%appdata%\.minecraft\mods\</code>
+                </div>
+                
+                <div class="step">
+                    <h4>Step 4: Install Fabric API</h4>
+                    <p>Download and place in mods folder (same as step 3)</p>
+                </div>
+                
+                <div class="step">
+                    <h4>Step 5: Launch & Play</h4>
+                    <p>Start Minecraft and press <strong>Right Shift</strong> to open ClickGUI</p>
+                </div>
             </div>
-            <div class="stat">
-                <h2>BETA</h2>
-                <p>Version</p>
+
+            <div style="background: rgba(0, 212, 255, 0.1); padding: 2rem; border-radius: 10px; border-left: 4px solid var(--primary); margin-top: 2rem;">
+                <h3 style="color: var(--primary); margin-bottom: 1rem;">🔑 Default Keybinds</h3>
+                <p style="margin-bottom: 0.5rem;"><strong>Right Shift</strong> - Open ClickGUI</p>
+                <p style="margin-bottom: 0.5rem;"><strong>P</strong> - Panic Module</p>
+                <p><strong>K</strong> - Settings</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modules -->
+    <section id="modules">
+        <div class="container">
+            <h2>📦 Popular Modules</h2>
+            
+            <div class="modules-grid">
+                <div class="module-badge">
+                    <div class="module-name">KillAura</div>
+                    <div class="module-category">Combat</div>
+                </div>
+                <div class="module-badge">
+                    <div class="module-name">2D ESP</div>
+                    <div class="module-category">Render</div>
+                </div>
+                <div class="module-badge">
+                    <div class="module-name">AutoCrystal</div>
+                    <div class="module-category">Combat</div>
+                </div>
+                <div class="module-badge">
+                    <div class="module-name">ElytraFly</div>
+                    <div class="module-category">Movement</div>
+                </div>
+                <div class="module-badge">
+                    <div class="module-name">Freecam</div>
+                    <div class="module-category">Movement</div>
+                </div>
+                <div class="module-badge">
+                    <div class="module-name">BlockESP</div>
+                    <div class="module-category">Render</div>
+                </div>
+                <div class="module-badge">
+                    <div class="module-name">PlayerESP</div>
+                    <div class="module-category">Render</div>
+                </div>
+                <div class="module-badge">
+                    <div class="module-name">ClickGUI</div>
+                    <div class="module-category">UI</div>
+                </div>
+                <div class="module-badge">
+                    <div class="module-name">HUD</div>
+                    <div class="module-category">UI</div>
+                </div>
+                <div class="module-badge">
+                    <div class="module-name">Friends</div>
+                    <div class="module-category">Social</div>
+                </div>
+                <div class="module-badge">
+                    <div class="module-name">AutoLog</div>
+                    <div class="module-category">Combat</div>
+                </div>
+                <div class="module-badge">
+                    <div class="module-name">Speed</div>
+                    <div class="module-category">Movement</div>
+                </div>
+            </div>
+
+            <p style="text-align: center; color: #888; margin-top: 3rem; font-size: 1.1rem;">
+                <strong>+ 99 more modules</strong> including AutoTool, FastPlace, XRay, Radar, and much more!
+            </p>
+        </div>
+    </section>
+
+    <!-- Requirements -->
+    <section id="requirements">
+        <div class="container">
+            <h2>💻 System Requirements</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div class="requirements-box">
+                    <h3>Minimum</h3>
+                    <ul>
+                        <li>Java 21+</li>
+                        <li>2GB RAM</li>
+                        <li>Minecraft 1.21.1</li>
+                        <li>Fabric Loader</li>
+                    </ul>
+                </div>
+
+                <div class="requirements-box">
+                    <h3>Recommended</h3>
+                    <ul>
+                        <li>Java 21 (Latest)</li>
+                        <li>4GB+ RAM</li>
+                        <li>SSD Storage</li>
+                        <li>GPU: NVIDIA/AMD</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
@@ -76,9 +674,40 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; 2026 76 CLIENT - Advanced Minecraft Mod</p>
+            <p>&copy; 2026 76 CLIENT - Advanced Minecraft Utility Mod</p>
             <p>Minecraft is a trademark of Microsoft</p>
+            <p><small>Beta Version - Use at your own risk</small></p>
         </div>
     </footer>
+
+    <script>
+        // Generate stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Add step numbers
+        document.querySelectorAll('.step').forEach((step, index) => {
+            step.style.counterIncrement = 'step-counter';
+            step.setAttribute('data-step', index + 1);
+        });
+    </script>
 </body>
 </html>
