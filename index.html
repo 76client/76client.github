@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>76 Client - Advanced Minecraft Utility Mod</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">76 CLIENT</div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/features">Features</a></li>
+                <li><a href="/modules">Modules ({{ modules_count }})</a></li>
+                <li><a href="/download">Download</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>76 CLIENT V1 BETA</h1>
+            <p>Advanced Minecraft Utility Mod for 1.21.1</p>
+            <p class="subtitle">{{ modules_count }} Powerful Modules | Fake Rotation | Combat Ready</p>
+            <button class="cta-btn">Get Started</button>
+        </div>
+    </section>
+
+    <!-- Features Preview -->
+    <section class="features-preview">
+        <div class="container">
+            <h2>Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>⚔️ Combat</h3>
+                    <p>KillAura with fake rotation, AutoCrystal, and more</p>
+                </div>
+                <div class="feature-card">
+                    <h3>👁️ ESP</h3>
+                    <p>2D/3D ESP for players, mobs, and blocks</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🛠️ Utility</h3>
+                    <p>Schematic Builder, Auto tools, and automation</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🎮 Movement</h3>
+                    <p>Freecam, ElytraFly, Speed, and more</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Module Count -->
+    <section class="stats">
+        <div class="container">
+            <div class="stat">
+                <h2>{{ modules_count }}</h2>
+                <p>Modules</p>
+            </div>
+            <div class="stat">
+                <h2>1.21.1</h2>
+                <p>Minecraft Version</p>
+            </div>
+            <div class="stat">
+                <h2>BETA</h2>
+                <p>Version</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 76 CLIENT - Advanced Minecraft Mod</p>
+            <p>Minecraft is a trademark of Microsoft</p>
+        </div>
+    </footer>
+</body>
+</html>
