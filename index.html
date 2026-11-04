@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #f8f8f8 0%, #f0f0f0 50%, #e8e8e8 100%);
+            background: linear-gradient(135deg, #ffffff 0%, #fafafa 50%, #f5f5f5 100%);
             min-height: 100vh;
             color: #333;
             overflow-x: hidden;
@@ -182,6 +182,22 @@
 
         .lang-content.active {
             display: block;
+        }
+
+        .page-section[data-lang="EN"] {
+            display: block;
+        }
+
+        .page-section[data-lang="TR"] {
+            display: none;
+        }
+
+        .page-section[data-lang="TR"].active {
+            display: block;
+        }
+
+        .page-section[data-lang="EN"].inactive {
+            display: none;
         }
 
         /* Navbar */
@@ -688,7 +704,7 @@
     <!-- Discord Popup Modal -->
     <div class="modal" id="discordModal">
         <div class="modal-content">
-            <h2>🎮 Join Our Discord</h2>
+            <h2 data-i18n="join_discord">🎮 Join Our Discord</h2>
             
             <div class="language-selector">
                 <button class="lang-btn active" onclick="selectLanguage('EN', this)">🇬🇧 English</button>
@@ -696,16 +712,16 @@
             </div>
 
             <div id="EN-content" class="lang-content active">
-                <p>Join our Discord server to get support, share tips, and connect with other players!</p>
+                <p data-i18n="discord_desc">Join our Discord server to get support, share tips, and connect with other players!</p>
             </div>
 
             <div id="TR-content" class="lang-content">
-                <p>Destek almak, ipuçlarını paylaşmak ve diğer oyuncularla bağlantı kurmak için Discord sunucumuza katılın!</p>
+                <p data-i18n="discord_desc">Destek almak, ipuçlarını paylaşmak ve diğer oyuncularla bağlantı kurmak için Discord sunucumuza katılın!</p>
             </div>
 
             <div class="modal-buttons">
-                <button class="discord-btn" onclick="joinDiscord()">Discord'a Git</button>
-                <button class="close-btn" onclick="closeModal()">Devam Et</button>
+                <button class="discord-btn" data-i18n="discord_go" onclick="joinDiscord()">Go to Discord</button>
+                <button class="close-btn" data-i18n="continue" onclick="closeModal()">Continue</button>
             </div>
         </div>
     </div>
@@ -718,10 +734,10 @@
                 CLIENT
             </div>
             <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#modules">Modules</a></li>
-                <li><a href="#install">Install</a></li>
+                <li><a href="#home" data-en="Home" data-tr="Anasayfa">Home</a></li>
+                <li><a href="#features" data-en="Features" data-tr="Özellikler">Features</a></li>
+                <li><a href="#modules" data-en="Modules" data-tr="Modüller">Modules</a></li>
+                <li><a href="#install" data-en="Install" data-tr="Kurulum">Install</a></li>
             </ul>
         </div>
     </nav>
@@ -731,40 +747,40 @@
         <div class="hero-content">
             <div class="hero-logo">76</div>
             <h1>76 CLIENT</h1>
-            <p>Advanced Minecraft Utility Mod for 1.21.1</p>
-            <p class="subtitle">111 Powerful Modules | Fake Rotation | Combat Ready</p>
-            <button class="cta-btn" onclick="document.getElementById('install').scrollIntoView({behavior: 'smooth'})">Get Started</button>
+            <p data-i18n="features">Advanced Minecraft Utility Mod for 1.21.1</p>
+            <p class="subtitle" data-i18n="join_discord">111 Powerful Modules | Fake Rotation | Combat Ready</p>
+            <button class="cta-btn" data-i18n="get_started" onclick="document.getElementById('install').scrollIntoView({behavior: 'smooth'})">Get Started</button>
         </div>
     </section>
 
     <!-- Features Section -->
     <section class="features" id="features">
         <div class="container">
-            <h2 class="section-title">✨ Key Features</h2>
+            <h2 class="section-title" data-i18n="key_features">✨ Key Features</h2>
             <div class="features-grid">
                 <div class="feature-card">
-                    <h3>⚔️ Combat</h3>
-                    <p>KillAura with fake rotation, AutoCrystal, CrystalAura, and advanced combat utilities</p>
+                    <h3 data-i18n="combat">⚔️ Combat</h3>
+                    <p data-i18n="combat_desc">KillAura with fake rotation, AutoCrystal, CrystalAura, and advanced combat utilities</p>
                 </div>
                 <div class="feature-card">
-                    <h3>👁️ ESP</h3>
-                    <p>2D/3D ESP for players, mobs, blocks, and storage detection</p>
+                    <h3 data-i18n="esp">👁️ ESP</h3>
+                    <p data-i18n="esp_desc">2D/3D ESP for players, mobs, blocks, and storage detection</p>
                 </div>
                 <div class="feature-card">
-                    <h3>🛠️ Utility</h3>
-                    <p>Auto tools, automation modules, and convenient utilities</p>
+                    <h3 data-i18n="utility">🛠️ Utility</h3>
+                    <p data-i18n="utility_desc">Auto tools, automation modules, and convenient utilities</p>
                 </div>
                 <div class="feature-card">
-                    <h3>🎮 Movement</h3>
-                    <p>Freecam, ElytraFly, Speed, and advanced movement options</p>
+                    <h3 data-i18n="movement">🎮 Movement</h3>
+                    <p data-i18n="movement_desc">Freecam, ElytraFly, Speed, and advanced movement options</p>
                 </div>
                 <div class="feature-card">
-                    <h3>🎨 Render</h3>
-                    <p>Beautiful visual enhancements and custom rendering effects</p>
+                    <h3 data-i18n="render">🎨 Render</h3>
+                    <p data-i18n="render_desc">Beautiful visual enhancements and custom rendering effects</p>
                 </div>
                 <div class="feature-card">
-                    <h3>⚙️ Customization</h3>
-                    <p>Fully configurable settings for every module with ClickGUI</p>
+                    <h3 data-i18n="customization">⚙️ Customization</h3>
+                    <p data-i18n="customization_desc">Fully configurable settings for every module with ClickGUI</p>
                 </div>
             </div>
         </div>
@@ -776,15 +792,15 @@
             <div class="stats-grid">
                 <div class="stat-box">
                     <h2>111</h2>
-                    <p>Total Modules</p>
+                    <p data-i18n="total_modules">Total Modules</p>
                 </div>
                 <div class="stat-box">
                     <h2>1.21.1</h2>
-                    <p>Minecraft Version</p>
+                    <p data-i18n="minecraft_version">Minecraft Version</p>
                 </div>
                 <div class="stat-box">
                     <h2>BETA</h2>
-                    <p>Current Status</p>
+                    <p data-i18n="current_status">Current Status</p>
                 </div>
             </div>
         </div>
@@ -793,55 +809,55 @@
     <!-- Featured Modules -->
     <section class="modules" id="modules">
         <div class="container">
-            <h2 class="section-title">🚀 Featured Modules</h2>
+            <h2 class="section-title" data-i18n="featured_modules">🚀 Featured Modules</h2>
             <div class="modules-grid">
                 <div class="module-card">
-                    <h4>KillAura <span class="module-new">NEW</span></h4>
-                    <p>Fake rotation kill aura with Silent and Grim modes. Your camera stays in place while others see you rotating.</p>
+                    <h4 data-i18n="killaura">KillAura <span class="module-new">NEW</span></h4>
+                    <p data-i18n="killaura_desc">Fake rotation kill aura with Silent and Grim modes. Your camera stays in place while others see you rotating.</p>
                 </div>
                 <div class="module-card">
-                    <h4>2D ESP <span class="module-new">NEW</span></h4>
-                    <p>Advanced 2D ESP rendering showing entity names, distances, and player information in real-time.</p>
+                    <h4 data-i18n="esp2d">2D ESP <span class="module-new">NEW</span></h4>
+                    <p data-i18n="esp2d_desc">Advanced 2D ESP rendering showing entity names, distances, and player information in real-time.</p>
                 </div>
                 <div class="module-card">
-                    <h4>AutoCrystal</h4>
-                    <p>Automatic crystal placement and detonation for efficient combat and block breaking.</p>
+                    <h4 data-i18n="autocrystal">AutoCrystal</h4>
+                    <p data-i18n="autocrystal_desc">Automatic crystal placement and detonation for efficient combat and block breaking.</p>
                 </div>
                 <div class="module-card">
-                    <h4>Freecam</h4>
-                    <p>Detach your camera from your player to explore and scout without revealing position.</p>
+                    <h4 data-i18n="freecam">Freecam</h4>
+                    <p data-i18n="freecam_desc">Detach your camera from your player to explore and scout without revealing position.</p>
                 </div>
                 <div class="module-card">
-                    <h4>ElytraFly</h4>
-                    <p>Enhanced elytra flight with smooth movement and optimized controls.</p>
+                    <h4 data-i18n="elytrafly">ElytraFly</h4>
+                    <p data-i18n="elytrafly_desc">Enhanced elytra flight with smooth movement and optimized controls.</p>
                 </div>
                 <div class="module-card">
-                    <h4>ClickGUI</h4>
-                    <p>Beautiful graphical interface for configuring all modules with easy-to-use controls.</p>
+                    <h4 data-i18n="clickgui">ClickGUI</h4>
+                    <p data-i18n="clickgui_desc">Beautiful graphical interface for configuring all modules with easy-to-use controls.</p>
                 </div>
                 <div class="module-card">
-                    <h4>PlayerESP</h4>
-                    <p>Locate nearby players with real-time detection and distance display.</p>
+                    <h4 data-i18n="playeresp">PlayerESP</h4>
+                    <p data-i18n="playeresp_desc">Locate nearby players with real-time detection and distance display.</p>
                 </div>
                 <div class="module-card">
-                    <h4>AutoTotem</h4>
-                    <p>Automatically swaps totem of undying when health gets low.</p>
+                    <h4 data-i18n="autototem">AutoTotem</h4>
+                    <p data-i18n="autototem_desc">Automatically swaps totem of undying when health gets low.</p>
                 </div>
                 <div class="module-card">
-                    <h4>Discord Presence</h4>
-                    <p>Show what you're playing on Discord with rich presence integration.</p>
+                    <h4 data-i18n="discord_presence">Discord Presence</h4>
+                    <p data-i18n="discord_presence_desc">Show what you're playing on Discord with rich presence integration.</p>
                 </div>
                 <div class="module-card">
-                    <h4>ChatMacro</h4>
-                    <p>Create custom chat commands and macros for quick messages and actions.</p>
+                    <h4 data-i18n="chatmacro">ChatMacro</h4>
+                    <p data-i18n="chatmacro_desc">Create custom chat commands and macros for quick messages and actions.</p>
                 </div>
                 <div class="module-card">
-                    <h4>Speed</h4>
-                    <p>Movement speed enhancement with multiple speed modes.</p>
+                    <h4 data-i18n="speed">Speed</h4>
+                    <p data-i18n="speed_desc">Movement speed enhancement with multiple speed modes.</p>
                 </div>
                 <div class="module-card">
-                    <h4>XRay</h4>
-                    <p>See through blocks to find ores and important resources easily.</p>
+                    <h4 data-i18n="xray">XRay</h4>
+                    <p data-i18n="xray_desc">See through blocks to find ores and important resources easily.</p>
                 </div>
             </div>
         </div>
@@ -850,13 +866,13 @@
     <!-- Installation Section -->
     <section class="installation" id="install">
         <div class="container">
-            <h2 class="section-title">📥 Installation Guide</h2>
+            <h2 class="section-title" data-i18n="installation_guide">📥 Installation Guide</h2>
             <div class="installation-steps">
                 <div class="step">
                     <div class="step-number">1</div>
                     <div class="step-content">
-                        <h3>Download Fabric Loader</h3>
-                        <p>Visit fabric.net and download the latest Fabric Loader installer for Minecraft 1.21.1</p>
+                        <h3 data-i18n="download_fabric">Download Fabric Loader</h3>
+                        <p data-i18n="download_fabric_desc">Visit fabric.net and download the latest Fabric Loader installer for Minecraft 1.21.1</p>
                         <div class="code-block">https://fabricmc.net/use/installer/</div>
                     </div>
                 </div>
@@ -864,8 +880,8 @@
                 <div class="step">
                     <div class="step-number">2</div>
                     <div class="step-content">
-                        <h3>Install Fabric</h3>
-                        <p>Run the Fabric installer and select Minecraft 1.21.1. Click "Install"</p>
+                        <h3 data-i18n="install_fabric">Install Fabric</h3>
+                        <p data-i18n="install_fabric_desc">Run the Fabric installer and select Minecraft 1.21.1. Click "Install"</p>
                         <div class="code-block">Select Version: 1.21.1 → Click Install</div>
                     </div>
                 </div>
@@ -873,8 +889,8 @@
                 <div class="step">
                     <div class="step-number">3</div>
                     <div class="step-content">
-                        <h3>Download Fabric API</h3>
-                        <p>Download Fabric API for version 1.21.1 from modrinth.com</p>
+                        <h3 data-i18n="download_fabric_api">Download Fabric API</h3>
+                        <p data-i18n="download_fabric_api_desc">Download Fabric API for version 1.21.1 from modrinth.com</p>
                         <div class="code-block">https://modrinth.com/mod/fabric-api</div>
                     </div>
                 </div>
@@ -882,8 +898,8 @@
                 <div class="step">
                     <div class="step-number">4</div>
                     <div class="step-content">
-                        <h3>Download 76 Client</h3>
-                        <p>Download the latest 76 Client build (client76.jar) from our releases page</p>
+                        <h3 data-i18n="download_76client">Download 76 Client</h3>
+                        <p data-i18n="download_76client_desc">Download the latest 76 Client build (client76.jar) from our releases page</p>
                         <div class="code-block">Place in: .minecraft/mods/</div>
                     </div>
                 </div>
@@ -891,8 +907,8 @@
                 <div class="step">
                     <div class="step-number">5</div>
                     <div class="step-content">
-                        <h3>Launch & Enjoy</h3>
-                        <p>Select Fabric profile in Minecraft Launcher and launch the game. Press RSHIFT to open ClickGUI!</p>
+                        <h3 data-i18n="launch_enjoy">Launch & Enjoy</h3>
+                        <p data-i18n="launch_enjoy_desc">Select Fabric profile in Minecraft Launcher and launch the game. Press RSHIFT to open ClickGUI!</p>
                         <div class="code-block">Keybind: Right Shift (RSHIFT) to toggle GUI</div>
                     </div>
                 </div>
@@ -903,24 +919,24 @@
     <!-- Requirements Section -->
     <section class="requirements">
         <div class="container">
-            <h2 class="section-title">⚙️ System Requirements</h2>
+            <h2 class="section-title" data-i18n="system_requirements">⚙️ System Requirements</h2>
             <div class="requirements-card">
                 <div class="req-grid">
                     <div class="req-item">
-                        <h4>💻 Java</h4>
-                        <p>Java 21+ Required</p>
+                        <h4 data-i18n="java">💻 Java</h4>
+                        <p data-i18n="java_req">Java 21+ Required</p>
                     </div>
                     <div class="req-item">
-                        <h4>🎮 Minecraft</h4>
-                        <p>Version 1.21.1</p>
+                        <h4 data-i18n="minecraft">🎮 Minecraft</h4>
+                        <p data-i18n="minecraft_req">Version 1.21.1</p>
                     </div>
                     <div class="req-item">
-                        <h4>🔧 Loader</h4>
-                        <p>Fabric Loader</p>
+                        <h4 data-i18n="loader">🔧 Loader</h4>
+                        <p data-i18n="loader_req">Fabric Loader</p>
                     </div>
                     <div class="req-item">
-                        <h4>📦 API</h4>
-                        <p>Fabric API</p>
+                        <h4 data-i18n="api">📦 API</h4>
+                        <p data-i18n="api_req">Fabric API</p>
                     </div>
                 </div>
             </div>
@@ -930,23 +946,23 @@
     <!-- Keybinds Section -->
     <section class="features">
         <div class="container">
-            <h2 class="section-title">⌨️ Default Keybinds</h2>
+            <h2 class="section-title" data-i18n="default_keybinds">⌨️ Default Keybinds</h2>
             <div class="features-grid">
                 <div class="feature-card">
-                    <h3>RSHIFT</h3>
-                    <p>Open/Close ClickGUI</p>
+                    <h3 data-i18n="rshift">RSHIFT</h3>
+                    <p data-i18n="rshift_desc">Open/Close ClickGUI</p>
                 </div>
                 <div class="feature-card">
-                    <h3>P</h3>
-                    <p>Toggle Panic Mode</p>
+                    <h3 data-i18n="p">P</h3>
+                    <p data-i18n="p_desc">Toggle Panic Mode</p>
                 </div>
                 <div class="feature-card">
-                    <h3>H</h3>
-                    <p>Show/Hide HUD</p>
+                    <h3 data-i18n="h">H</h3>
+                    <p data-i18n="h_desc">Show/Hide HUD</p>
                 </div>
                 <div class="feature-card">
-                    <h3>M</h3>
-                    <p>Open Chat Messages</p>
+                    <h3 data-i18n="m">M</h3>
+                    <p data-i18n="m_desc">Open Chat Messages</p>
                 </div>
             </div>
         </div>
@@ -963,21 +979,237 @@
     <button class="scroll-top" id="scrollTop">↑</button>
 
     <script>
-        // Discord Popup Functions
+        // Language management
         let currentLanguage = 'EN';
 
         function selectLanguage(lang, element) {
             currentLanguage = lang;
             
+            // Modal dili değiştir
             document.querySelectorAll('.lang-content').forEach(el => {
                 el.classList.remove('active');
             });
             document.getElementById(lang + '-content').classList.add('active');
 
+            // Navbar linklerini güncelle
+            document.querySelectorAll('[data-en][data-tr]').forEach(el => {
+                el.textContent = lang === 'EN' ? el.getAttribute('data-en') : el.getAttribute('data-tr');
+            });
+
+            // Sayfadaki tüm metin öğelerini güncelle
+            updatePageLanguage(lang);
+
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
             element.classList.add('active');
+
+            // Local storage'a kaydet
+            localStorage.setItem('selectedLanguage', lang);
+        }
+
+        const translations = {
+            'EN': {
+                'home': 'Home',
+                'features': 'Features',
+                'modules': 'Modules',
+                'install': 'Install',
+                'join_discord': '🎮 Join Our Discord',
+                'discord_desc': 'Join our Discord server to get support, share tips, and connect with other players!',
+                'get_started': 'Get Started',
+                'key_features': '✨ Key Features',
+                'combat': '⚔️ Combat',
+                'combat_desc': 'KillAura with fake rotation, AutoCrystal, CrystalAura, and advanced combat utilities',
+                'esp': '👁️ ESP',
+                'esp_desc': '2D/3D ESP for players, mobs, blocks, and storage detection',
+                'utility': '🛠️ Utility',
+                'utility_desc': 'Auto tools, automation modules, and convenient utilities',
+                'movement': '🎮 Movement',
+                'movement_desc': 'Freecam, ElytraFly, Speed, and advanced movement options',
+                'render': '🎨 Render',
+                'render_desc': 'Beautiful visual enhancements and custom rendering effects',
+                'customization': '⚙️ Customization',
+                'customization_desc': 'Fully configurable settings for every module with ClickGUI',
+                'total_modules': 'Total Modules',
+                'minecraft_version': 'Minecraft Version',
+                'current_status': 'Current Status',
+                'featured_modules': '🚀 Featured Modules',
+                'killaura': 'KillAura',
+                'killaura_desc': 'Fake rotation kill aura with Silent and Grim modes. Your camera stays in place while others see you rotating.',
+                'esp2d': '2D ESP',
+                'esp2d_desc': 'Advanced 2D ESP rendering showing entity names, distances, and player information in real-time.',
+                'autocrystal': 'AutoCrystal',
+                'autocrystal_desc': 'Automatic crystal placement and detonation for efficient combat and block breaking.',
+                'freecam': 'Freecam',
+                'freecam_desc': 'Detach your camera from your player to explore and scout without revealing position.',
+                'elytrafly': 'ElytraFly',
+                'elytrafly_desc': 'Enhanced elytra flight with smooth movement and optimized controls.',
+                'clickgui': 'ClickGUI',
+                'clickgui_desc': 'Beautiful graphical interface for configuring all modules with easy-to-use controls.',
+                'playeresp': 'PlayerESP',
+                'playeresp_desc': 'Locate nearby players with real-time detection and distance display.',
+                'autototem': 'AutoTotem',
+                'autototem_desc': 'Automatically swaps totem of undying when health gets low.',
+                'discord_presence': 'Discord Presence',
+                'discord_presence_desc': 'Show what you\'re playing on Discord with rich presence integration.',
+                'chatmacro': 'ChatMacro',
+                'chatmacro_desc': 'Create custom chat commands and macros for quick messages and actions.',
+                'speed': 'Speed',
+                'speed_desc': 'Movement speed enhancement with multiple speed modes.',
+                'xray': 'XRay',
+                'xray_desc': 'See through blocks to find ores and important resources easily.',
+                'installation_guide': '📥 Installation Guide',
+                'download_fabric': 'Download Fabric Loader',
+                'download_fabric_desc': 'Visit fabric.net and download the latest Fabric Loader installer for Minecraft 1.21.1',
+                'install_fabric': 'Install Fabric',
+                'install_fabric_desc': 'Run the Fabric installer and select Minecraft 1.21.1. Click "Install"',
+                'download_fabric_api': 'Download Fabric API',
+                'download_fabric_api_desc': 'Download Fabric API for version 1.21.1 from modrinth.com',
+                'download_76client': 'Download 76 Client',
+                'download_76client_desc': 'Download the latest 76 Client build (client76.jar) from our releases page',
+                'launch_enjoy': 'Launch & Enjoy',
+                'launch_enjoy_desc': 'Select Fabric profile in Minecraft Launcher and launch the game. Press RSHIFT to open ClickGUI!',
+                'system_requirements': '⚙️ System Requirements',
+                'java': '💻 Java',
+                'java_req': 'Java 21+ Required',
+                'minecraft': '🎮 Minecraft',
+                'minecraft_req': 'Version 1.21.1',
+                'loader': '🔧 Loader',
+                'loader_req': 'Fabric Loader',
+                'api': '📦 API',
+                'api_req': 'Fabric API',
+                'default_keybinds': '⌨️ Default Keybinds',
+                'rshift': 'RSHIFT',
+                'rshift_desc': 'Open/Close ClickGUI',
+                'p': 'P',
+                'p_desc': 'Toggle Panic Mode',
+                'h': 'H',
+                'h_desc': 'Show/Hide HUD',
+                'm': 'M',
+                'm_desc': 'Open Chat Messages',
+                'continue': 'Continue',
+                'discord_go': "Go to Discord",
+            },
+            'TR': {
+                'home': 'Anasayfa',
+                'features': 'Özellikler',
+                'modules': 'Modüller',
+                'install': 'Kurulum',
+                'join_discord': '🎮 Discord Sunucumuza Katıl',
+                'discord_desc': 'Destek almak, ipuçlarını paylaşmak ve diğer oyuncularla bağlantı kurmak için Discord sunucumuza katılın!',
+                'get_started': 'Başla',
+                'key_features': '✨ Ana Özellikler',
+                'combat': '⚔️ Savaş',
+                'combat_desc': 'Fake rotation ile KillAura, AutoCrystal, CrystalAura ve gelişmiş savaş araçları',
+                'esp': '👁️ ESP',
+                'esp_desc': 'Oyuncular, yaratıklar, bloklar ve depo tespiti için 2D/3D ESP',
+                'utility': '🛠️ Yardımcı Program',
+                'utility_desc': 'Otomatik araçlar, otomasyon modülleri ve kullanışlı yardımcı programlar',
+                'movement': '🎮 Hareket',
+                'movement_desc': 'Freecam, ElytraFly, Speed ve gelişmiş hareket seçenekleri',
+                'render': '🎨 Renderlar',
+                'render_desc': 'Güzel görsel iyileştirmeler ve özel renderler efektleri',
+                'customization': '⚙️ Özelleştirme',
+                'customization_desc': 'ClickGUI ile her modül için tamamen özelleştirilebilir ayarlar',
+                'total_modules': 'Toplam Modül',
+                'minecraft_version': 'Minecraft Sürümü',
+                'current_status': 'Mevcut Durum',
+                'featured_modules': '🚀 Öne Çıkan Modüller',
+                'killaura': 'KillAura',
+                'killaura_desc': 'Silent ve Grim modları ile fake rotation kill aura. Kameranız yerinde kalırken diğerleri sizi dönerken görürler.',
+                'esp2d': '2D ESP',
+                'esp2d_desc': 'Varlık isimleri, mesafeleri ve oyuncu bilgilerini gerçek zamanda gösteren gelişmiş 2D ESP renderı.',
+                'autocrystal': 'AutoCrystal',
+                'autocrystal_desc': 'Verimli savaş ve blok kırma için otomatik kristal yerleştirme ve patlama.',
+                'freecam': 'Freecam',
+                'freecam_desc': 'Kameranızı oyuncunuzdan ayırarak keşfetmek ve casus yapmak için.',
+                'elytrafly': 'ElytraFly',
+                'elytrafly_desc': 'Düzgün hareket ve optimize edilmiş kontroller ile geliştirilmiş Elytra uçuşu.',
+                'clickgui': 'ClickGUI',
+                'clickgui_desc': 'Tüm modülleri yapılandırmak için güzel grafik ara yüzü ve kolay kontroller.',
+                'playeresp': 'PlayerESP',
+                'playeresp_desc': 'Yakındaki oyuncuları gerçek zamanlı tespit ve mesafe gösterimi ile bulun.',
+                'autototem': 'AutoTotem',
+                'autototem_desc': 'Can düşük olduğunda otomatik olarak totem ölümsüzlüğünü değiştirir.',
+                'discord_presence': 'Discord Presence',
+                'discord_presence_desc': 'Discord\'ta oynadığınız şeyi rich presence entegrasyonu ile gösterin.',
+                'chatmacro': 'ChatMacro',
+                'chatmacro_desc': 'Hızlı mesajlar ve eylemler için özel sohbet komutları ve makrolar oluşturun.',
+                'speed': 'Speed',
+                'speed_desc': 'Birden fazla hız modları ile hareket hızı geliştirme.',
+                'xray': 'XRay',
+                'xray_desc': 'Cevher ve önemli kaynakları kolaylıkla bulmak için blokların içine bakın.',
+                'installation_guide': '📥 Kurulum Kılavuzu',
+                'download_fabric': 'Fabric Loader İndir',
+                'download_fabric_desc': 'fabric.net ziyaret edin ve Minecraft 1.21.1 için en son Fabric Loader yükleyicisini indirin',
+                'install_fabric': 'Fabric Yükle',
+                'install_fabric_desc': 'Fabric yükleyicisini çalıştırın ve Minecraft 1.21.1\'i seçin. "Yükle" ye tıklayın',
+                'download_fabric_api': 'Fabric API İndir',
+                'download_fabric_api_desc': 'modrinth.com\'dan sürüm 1.21.1 için Fabric API\'yi indirin',
+                'download_76client': '76 Client İndir',
+                'download_76client_desc': 'En son 76 Client derlemesini (client76.jar) yayınlar sayfamızdan indirin',
+                'launch_enjoy': 'Başlat & Oyun Oyna',
+                'launch_enjoy_desc': 'Minecraft Launcher\'da Fabric profilini seçin ve oyunu başlatın. ClickGUI\'yi açmak için RSHIFT tuşuna basın!',
+                'system_requirements': '⚙️ Sistem Gereksinimleri',
+                'java': '💻 Java',
+                'java_req': 'Java 21+ Gerekli',
+                'minecraft': '🎮 Minecraft',
+                'minecraft_req': 'Sürüm 1.21.1',
+                'loader': '🔧 Yükleyici',
+                'loader_req': 'Fabric Loader',
+                'api': '📦 API',
+                'api_req': 'Fabric API',
+                'default_keybinds': '⌨️ Varsayılan Tuş Kombinasyonları',
+                'rshift': 'RSHIFT',
+                'rshift_desc': 'ClickGUI\'yi Aç/Kapat',
+                'p': 'P',
+                'p_desc': 'Panik Modunu Aç/Kapat',
+                'h': 'H',
+                'h_desc': 'HUD\'ı Göster/Gizle',
+                'm': 'M',
+                'm_desc': 'Sohbet Mesajlarını Aç',
+                'continue': 'Devam Et',
+                'discord_go': "Discord'a Git",
+            }
+        };
+
+        function updatePageLanguage(lang) {
+            // Tüm veri öğelerini güncelle
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+
+            // HTML dosyasının diline ayarla
+            document.documentElement.lang = lang === 'EN' ? 'en' : 'tr';
+        }
+
+        function selectLanguage(lang, element) {
+            currentLanguage = lang;
+            
+            // Modal dili değiştir
+            document.querySelectorAll('.lang-content').forEach(el => {
+                el.classList.remove('active');
+            });
+            document.getElementById(lang + '-content').classList.add('active');
+
+            // Navbar linklerini güncelle
+            document.querySelectorAll('[data-en][data-tr]').forEach(el => {
+                el.textContent = lang === 'EN' ? el.getAttribute('data-en') : el.getAttribute('data-tr');
+            });
+
+            // Sayfadaki tüm metin öğelerini güncelle
+            updatePageLanguage(lang);
+
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            element.classList.add('active');
+
+            // Local storage'a kaydet
+            localStorage.setItem('selectedLanguage', lang);
         }
 
         function joinDiscord() {
@@ -993,9 +1225,15 @@
             }, 300);
         }
 
-        // Show modal on page load
+        // Sayfa yüklendiğinde kaydedilmiş dili kontrol et
         window.addEventListener('load', () => {
-            // Modal will show automatically
+            const savedLanguage = localStorage.getItem('selectedLanguage');
+            if (savedLanguage) {
+                const langBtn = document.querySelector(`.lang-btn[onclick*="${savedLanguage}"]`);
+                if (langBtn) {
+                    selectLanguage(savedLanguage, langBtn);
+                }
+            }
         });
 
         // Smooth scrolling
